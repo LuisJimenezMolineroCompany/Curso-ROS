@@ -2,6 +2,7 @@
 # BEGIN ALL
 #!/usr/bin/env python
 
+# Subscriber to make JUS rotate clockwise to the speed published in topic '/speed'
 
 # ROS libraries
 import rospy
@@ -15,8 +16,9 @@ def callback(msg):
     print "speed= ",msg.data
     # Maestro- (servomotors rotate in the same direction)
     s= m.Controller()
-    s.setTarget(4,msg.data)
-    s.setTarget(5,msg.data)
+    speed=msg.data
+    s.setTarget(4,-speed)
+    s.setTarget(5,-speed)
 # END CALLBACK
 
 rospy.init_node('Maestro_subscriber')
